@@ -1,0 +1,19 @@
+body{
+    background-color: white;
+    color: black;
+    max-width: 50%;
+    margin: auto;
+    font-family: sans-serif;
+}
+
+p1{
+    font-size: 20px;
+    /* font-weight: bold; */
+    line-height: 1.5;
+}
+
+article+article{
+    margin-top: 3rem;
+    border-top: 1px solid #ccc;
+    padding-top: 2rem
+}
