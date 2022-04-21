@@ -18,6 +18,9 @@
                 </a>
                 <br>
             </h1>
+            <p>
+                <a href="#">{{$post->category->name }}</a>
+            </p>
             <div>
                 {{$post->excerpt}}
             </div>

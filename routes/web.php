@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+use App\Models\User;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 /*
@@ -15,9 +16,18 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/users', function () {
+    return view(
+        'users',
+        ['users' => User::all()]
+    );
+});
 
 Route::get('/', function () {
-
+    return view(
+        'posts',
+        ['posts' => Post::all()]
+    );
     //$posts=[];
 
     /* $posts= array_map(function ($file){
@@ -41,10 +51,8 @@ Route::get('/', function () {
             $document->slug
         );
     }*/
-    return view(
-        'posts',
-        ['posts' => Post::all()]
-    );
+
+
    // ddd($posts[0]->body);
 
    // $document = YamlFrontMatter::parseFile(resource_path('posts/my-first-post.html'));
@@ -59,8 +67,8 @@ Route::get('/', function () {
     // return view('posts');
 });
 
-Route::get('/posts/{post}', function ($slug) {
-    $post=Post::findOrFail($slug);
+Route::get('/posts/{post:slug}', function (Post $post) {
+    //$post=Post::findOrFail($post);
     return view(
         'post',
         ['post' => $post]
