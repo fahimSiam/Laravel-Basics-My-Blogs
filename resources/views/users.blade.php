@@ -69,15 +69,18 @@
                 <form style="display:inline-block" action="#" method="POST">  {{--{{ action('ProductsController@destroy', ['id' => $user->id]) }}--}}
                     @method('DELETE')
                     @csrf
-                    <button class="btn btn-sm btn-danger"> Delete</button>
+                   {{-- <button class="btn btn-sm btn-danger"> Delete</button>--}}
                 </form>
             </td>
         </tr>
     @endforeach
     </tbody>
 </table>
-
-{{ $users->links() }}
+       {{-- {!! $users->appends(['sort' => 'email'])->links() !!}--}}
+        <div class="d-flex justify-content-center">
+            {!! $users->links() !!}
+        </div>
+{{--{{ $users->links() }}--}}
 
 <p>
     Displaying {{$users->count()}} of {{ $users->total() }} user(s).
