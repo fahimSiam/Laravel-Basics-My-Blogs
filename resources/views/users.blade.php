@@ -1,7 +1,10 @@
+{{--
 
 <x-layout>
     <x-slot name="content">
-       {{-- @foreach($users as $user)--}}
+       --}}
+{{-- @foreach($users as $user)--}}{{--
+
             <table>
                     <th >Name</th>
                     <th >Email</th>
@@ -16,11 +19,14 @@
                     </tr>
                 @endforeach
             </table>
-       {{-- @endforeach--}}
+       --}}
+{{-- @endforeach--}}{{--
+
     </x-slot>
 </x-layout>
 
 
+--}}
 {{--
 <article>
     <h1>
@@ -37,3 +43,44 @@
     </div>
 </article>
 --}}
+<x-layout>
+    <x-slot name="content">
+<table class="table table-bordered table-hover">
+    <thead>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone Number</th>
+    </thead>
+    <tbody>
+    @if ($users->count() == 0)
+        <tr>
+            <td colspan="5">No users to display.</td>
+        </tr>
+    @endif
+
+    @foreach ($users as $user)
+        <tr>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->email}}</td>
+            <td>{{ $user->phone_number }}</td>
+            <td>
+                <a class="btn btn-sm btn-success" href="#">Edit</a>  {{--{{ action('ProductsController@edit', ['id' => $user->id]) }}--}}
+
+                <form style="display:inline-block" action="#" method="POST">  {{--{{ action('ProductsController@destroy', ['id' => $user->id]) }}--}}
+                    @method('DELETE')
+                    @csrf
+                    <button class="btn btn-sm btn-danger"> Delete</button>
+                </form>
+            </td>
+        </tr>
+    @endforeach
+    </tbody>
+</table>
+
+{{ $users->links() }}
+
+<p>
+    Displaying {{$users->count()}} of {{ $users->total() }} user(s).
+</p>
+</x-slot>
+</x-layout>

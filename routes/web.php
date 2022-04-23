@@ -17,10 +17,13 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 |
 */
 Route::get('/users', function () {
-    return view(
+    $users = User::paginate(20);
+
+    return view('users')->with('users', $users);
+   /* return view(
         'users',
         ['users' => User::all()]
-    );
+    );*/
 });
 
 Route::get('/', function () {
