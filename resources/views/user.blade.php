@@ -2,16 +2,16 @@
     <x-slot  name="content">
         <article>
             <h1>
-                {{ $post->title}}
+                {{ $user->name}}
                 <br>
             </h1>
             <p>
-                <a href="/categories/{{$post->category->slug}}">{{$post->category->name }}</a>
+                <a href="#">{{$user->email }}</a>
             </p>
             <div>
-                {!!$post->body!!}
+                {{$user->phone_number}}
             </div>
         </article>
-        <a href="/">Go Back</a>
+        <a href="/users">Go Back</a>
     </x-slot>
 </x-layout>
