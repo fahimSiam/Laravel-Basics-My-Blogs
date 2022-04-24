@@ -9,6 +9,7 @@ class Post extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $with=['category','author']; //This gets rid of n plus one trap problem
    // protected $fillable = ['title', 'excerpt', 'body'];
    /* public function getRouteKeyName()
     {
@@ -17,4 +18,7 @@ class Post extends Model
     public function category(){
         return $this->belongsTo(Category::class); //elequent relationship
 }
+    public function author(){
+        return $this->belongsTo(User::class, 'user_id'); //elequent relationship
+    }
 }

@@ -37,9 +37,16 @@ Route::get('/users/{user}', function (User $user) {
 });
 
 Route::get('/', function () {
+   /* \Illuminate\Support\Facades\DB::listen(function ($query){
+        logger($query->sql, $query->bindings);
+    });*/  //put queries in logs/laravel.log can be done with composer clockwork
     return view(
         'posts',
-        ['posts' => Post::all()]
+        [
+            'posts' => Post::latest()->get() //n plus one trap fixed in models
+            //'posts' => Post::latest()->with('category', 'author')->get() //latest sorts it //with stops the n plus one trap
+            //'posts' => Post::all()  //this has n plus one trap more queries
+        ]
     );
     //$posts=[];
 
@@ -92,7 +99,18 @@ Route::get('categories/{category:slug}', function (Category $category){
     return view(
         'posts',
         [
-            'posts' => $category->posts
+            'posts' => $category->posts //n plus one trap fixed in models
+            //'posts' => $category->posts->load(['category', 'author'])
+        ]
+    );
+});
+
+Route::get('authors/{author:username}', function (User $author){
+    return view(
+        'posts',
+        [
+            'posts' => $author->posts //n plus one trap fixed in models
+           // 'posts' => $author->posts->load(['category', 'author'])
         ]
     );
 });
