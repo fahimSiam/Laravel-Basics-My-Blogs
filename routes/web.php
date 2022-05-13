@@ -43,7 +43,8 @@ Route::get('/', function () {
     return view(
         'posts',
         [
-            'posts' => Post::latest()->get() //n plus one trap fixed in models
+            'posts' => Post::latest()->get(), //n plus one trap fixed in models
+            'categories' => Category::all(),
             //'posts' => Post::latest()->with('category', 'author')->get() //latest sorts it //with stops the n plus one trap
             //'posts' => Post::all()  //this has n plus one trap more queries
         ]
@@ -99,7 +100,9 @@ Route::get('categories/{category:slug}', function (Category $category){
     return view(
         'posts',
         [
-            'posts' => $category->posts //n plus one trap fixed in models
+            'posts' => $category->posts, //n plus one trap fixed in models
+            'currentCategory'=>$category,
+            'categories' => Category::all(),
             //'posts' => $category->posts->load(['category', 'author'])
         ]
     );
@@ -109,7 +112,8 @@ Route::get('authors/{author:username}', function (User $author){
     return view(
         'posts',
         [
-            'posts' => $author->posts //n plus one trap fixed in models
+            'posts' => $author->posts, //n plus one trap fixed in models
+            'categories' => Category::all(),
            // 'posts' => $author->posts->load(['category', 'author'])
         ]
     );
