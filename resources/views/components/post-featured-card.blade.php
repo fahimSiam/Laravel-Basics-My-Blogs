@@ -17,7 +17,7 @@
                 <div class="mt-4">
                     <h1 class="text-3xl">
                         <a href="/posts/{{$post->slug}}">
-                         {{$post->title}}
+                            {{$post->title}}
                         </a>
                     </h1>
 
@@ -27,10 +27,10 @@
                 </div>
             </header>
 
-            <div class="text-sm mt-2">
-                <p>
-                    {{$post->excerpt}}
-                </p>
+            <div class="text-sm mt-2 space-y-4">
+
+                {!! $post->excerpt !!}
+
             </div>
 
             <footer class="flex justify-between items-center mt-8">
